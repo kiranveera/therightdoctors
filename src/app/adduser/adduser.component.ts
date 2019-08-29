@@ -14,17 +14,23 @@ users:any[]=[]
 b:boolean=false
 objecttomodify:object
   ngOnInit() {
+    
    this.http.get('/routes/viewusers').subscribe((res)=>{
      this.users=res['message']
    })
 }
 adduser(x){
+ 
+    if (x.Username == "" || x.address == "" || x.phnumber == "" || x.gmail == "") {
+      alert("enter valid details")
+    }
+    else {
   this.http.post('/routes/adduser',x).subscribe((res)=>{
     alert(res['message'])
     this.http.get('/routes/viewusers').subscribe((res)=>{
       this.users=res['message']
     })
-  })
+  })}
 
 }
 edit(y) {
